@@ -13,7 +13,7 @@ class PracticalCppDesignConan(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
     generators = "cmake"
-    requires = "Catch2/2.11.1@catchorg/stable"
+    requires = "catch2/3.0.1"
 
     def config_options(self):
         if self.settings.os == "Windows":

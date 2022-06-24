@@ -22,15 +22,16 @@ void Publisher::PublisherImpl::attach(const std::string &event, std::unique_ptr<
 }
 std::unique_ptr<Observer> Publisher::PublisherImpl::detach(const std::string &event, const std::string &name)
 {
-  auto tmp = std::move(events[event][name]);
+  auto tmp = std::move(events.at(event).at(name));
   events[event].erase(name);
   return tmp;
 }
 void Publisher::PublisherImpl::raise(const std::string &event, std::shared_ptr<EventData> eventData)
 {
   auto &subscribers = events[event];
-  for (auto &[name, observer] : subscribers)
+  for (auto &[name, observer] : subscribers) {
     observer->notify(eventData);
+  }
 }
 Publisher::Publisher()
 {
